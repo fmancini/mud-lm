@@ -26,7 +26,7 @@ Emulador de juego estilo MUD utilizando ollama + LLM
     pip install -r requirements.txt
     ```
 
-4. Configura ollama y LLM según las instrucciones de sus respectivas documentaciones.
+4. Configura [ollama](https://ollama.com/) y LLM según las instrucciones de sus respectivas documentaciones.
 
 5. Ejecuta el emulador:
     ```bash
