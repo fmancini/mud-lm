@@ -28,7 +28,6 @@ def get_game_dialogue(prompt):
         return "Error en la generación del diálogo"
 
 def start_game():
-    # Ya no necesitamos el cliente OpenAI
     
     # Genera el saludo inicial
     welcome = get_game_dialogue("Genera un saludo para dar la bienvenida a un nuevo jugador")
