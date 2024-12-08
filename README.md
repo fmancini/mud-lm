@@ -11,7 +11,7 @@ Emulador de juego estilo MUD utilizando ollama + LLM
 
 1. Clona el repositorio:
     ```bash
-    git clone https://github.com/tu-usuario/mud-lm.git
+    git clone https://github.com/fmancini/mud-lm/mud-lm.git
     cd mud-lm
     ```
 
