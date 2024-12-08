@@ -1,6 +1,7 @@
 import requests
 import json
-
+import tkinter as tk
+from tkinter import simpledialog, messagebox
 
 def get_game_dialogue(prompt):
     url = "http://localhost:11434/api/generate"
@@ -28,11 +29,13 @@ def get_game_dialogue(prompt):
         print(f"Error al comunicarse con Ollama: {e}")
         return "Error en la generación del diálogo"
 
-def start_game():
-    
+def start_game_gui():
+    root = tk.Tk()
+    root.withdraw()  # Oculta la ventana principal
+
     # Genera el saludo inicial
     welcome = get_game_dialogue("Genera un saludo para dar la bienvenida a un nuevo jugador")
-    player_name = input(f"{welcome}\nIngresa tu nombre: ")
+    player_name = simpledialog.askstring("Nombre del jugador", f"{welcome}\nIngresa tu nombre:")
     points = 0
     
     # Define las situaciones base
@@ -46,8 +49,8 @@ def start_game():
         # Genera la descripción y opciones
         prompt = f"Describe una situación de aventura con {scenario} y da 2 opciones numeradas para resolver"
         question = get_game_dialogue(prompt)
-        print("\n" + "="*50)
-        respuesta = input(f"{question}\nElige (1/2): ")
+        
+        respuesta = simpledialog.askstring("Situación", f"{question}\nElige (1/2): ")
         
         # Genera el resultado
         result_prompt = f"El jugador eligió la opción {respuesta}. Genera un resultado para esta elección"
@@ -55,16 +58,15 @@ def start_game():
         
         if respuesta == "1":
             points += 10
-            print(f"\n{resultado}")
-            print(f"Has ganado 10 puntos. Puntos totales: {points}")
+            messagebox.showinfo("Resultado", f"{resultado}\nHas ganado 10 puntos. Puntos totales: {points}")
         else:
-            print(f"\n{resultado}")
-            print(f"Puntos actuales: {points}")
+            messagebox.showinfo("Resultado", f"{resultado}\nPuntos actuales: {points}")
 
     # Final del juego
     ending = get_game_dialogue(f"Genera un mensaje de despedida para {player_name} que obtuvo {points} puntos")
-    print("\n" + "="*50)
-    print(ending)
+    messagebox.showinfo("Fin del juego", ending)
+
+    root.destroy()  # Cierra la ventana principal
 
 if __name__ == "__main__":
-    start_game()
+    start_game_gui()
